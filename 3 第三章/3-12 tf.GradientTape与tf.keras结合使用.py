@@ -75,7 +75,7 @@ for epoch in range(epochs):
             metric(y_batch,y_pred)
         grads = tape.gradient(loss, model.variables)
         grads_and_vars = zip(grads, model.variables)
-        optimizer.apply_gradient(grads_and_vars)
+        optimizer.apply_gradients(grads_and_vars)
         print("\rEpoch",epoch,"train_mse:",metric.result().numpy(),end="")
     y_valid_pred = model(x_valid_scaled)
     vaild_loss = tf.reduce_mean(keras.losses.mean_squared_error(y_valid_pred,y_valid))
@@ -83,6 +83,6 @@ for epoch in range(epochs):
 
 
 
-model.compile(loss = "mean_squared_error",optimizer='sgd')
-callbacks = [keras.callbacks.EarlyStopping(patience=5,min_delta=1e-2)]
+# model.compile(loss = "mean_squared_error",optimizer='sgd')
+# callbacks = [keras.callbacks.EarlyStopping(patience=5,min_delta=1e-2)]
 
